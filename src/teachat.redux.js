@@ -3,16 +3,27 @@ import axios from 'axios';
 
 const EAT = 'eat';
 const HUNGRY = 'hungry';
+const ARTICLE_LIST = 'article_list';
+
+const initState = {
+  num: 160,
+  list: []
+};
 
 // reducer
-export const weight = (state = 160, action) => {
+export const weight = (state = initState, action) => {
   switch (action.type) {
     case EAT:
-      return state + 10;
+      console.log('EAT action', action);
+      return {...state, num: state.num + 10};
     case HUNGRY:
-      return state - 10;
+      console.log('HUNGRY action', action);
+      return {...state, num: state.num - 10};
+    case ARTICLE_LIST:
+      console.log('ARTICLE_LIST action', action);
+      return {...state, list: action.playload.article};
     default: 
-      return state;
+      return initState;
   }
 }
 
@@ -36,10 +47,9 @@ export const eatAsync = () => {
 export const getArticle = () => {
   return dispatch => {
     setTimeout(() => {
-      dispatch(() => {
-        axios.get('/v1/article/list').then(res => {
-          console.log('article', res)
-        })
+      axios.get('/v1/article/list').then(res => {
+        console.log('article', res)
+        dispatch({type: ARTICLE_LIST, playload: res.data});
       })
     }, 2000)
   }

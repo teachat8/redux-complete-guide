@@ -9,10 +9,15 @@ class App extends React.Component {
     // const num = store.getState();
 
     // react-redux
-    const {num, eat, hungry, eatAsync,getArticle} = this.props;
+    const {num, eat, hungry, eatAsync,getArticle, list} = this.props;
 
     return (
       <>
+        {list.map((item, index) => {
+          return <div key={index}>
+            {item.title}
+          </div>
+        })}
         <h2>teachat 当前的体重为{num}斤</h2>
         {/* 
         <button onClick={() => store.dispatch(eat())}>吃了一些山珍海味</button>
@@ -35,7 +40,7 @@ class App extends React.Component {
 
 // 把state 挂到 props上面
 const mapStateToProps = (state) => {
-  return {num: state}
+  return {num: state.num, list: state.list}
 };
 
 // 把action 挂在到 props上面
