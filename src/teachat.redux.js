@@ -1,4 +1,5 @@
 import { createStore } from 'redux';
+import axios from 'axios';
 
 const EAT = 'eat';
 const HUNGRY = 'hungry';
@@ -27,6 +28,19 @@ export const eatAsync = () => {
   return dispatch => {
     setTimeout(() => {
       dispatch(eat());
+    }, 2000)
+  }
+  
+}
+
+export const getArticle = () => {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(() => {
+        axios.get('/v1/article/list').then(res => {
+          console.log('article', res)
+        })
+      })
     }, 2000)
   }
   

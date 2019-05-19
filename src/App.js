@@ -1,5 +1,5 @@
 import React from 'react';
-import { eat, hungry,eatAsync } from './teachat.redux';
+import { eat, hungry,eatAsync, getArticle } from './teachat.redux';
 import {connect} from 'react-redux';
 
 class App extends React.Component {
@@ -9,7 +9,7 @@ class App extends React.Component {
     // const num = store.getState();
 
     // react-redux
-    const {num, eat, hungry, eatAsync} = this.props;
+    const {num, eat, hungry, eatAsync,getArticle} = this.props;
 
     return (
       <>
@@ -25,6 +25,8 @@ class App extends React.Component {
         <br/>
         <button onClick={() => eatAsync()}>等了一会儿，吃了一个煎饼</button>
         <br/>
+        <button onClick={() => getArticle()}>获取文章</button>
+        <br/>
         <button onClick={() => hungry()}>饿了一天</button>
       </>
     );
@@ -37,5 +39,5 @@ const mapStateToProps = (state) => {
 };
 
 // 把action 挂在到 props上面
-const actionCreators = {eat, hungry, eatAsync}
+const actionCreators = {eat, hungry, eatAsync, getArticle}
 export default connect(mapStateToProps, actionCreators)(App);
