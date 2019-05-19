@@ -23,6 +23,15 @@ export const eat = () => {
   return {type: EAT}
 }
 
+export const eatAsync = () => {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(eat());
+    }, 2000)
+  }
+  
+}
+
 export const hungry = () => {
   console.log('饿了一天');
   return {type: HUNGRY}
